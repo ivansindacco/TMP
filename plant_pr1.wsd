@@ -1,0 +1,26 @@
+@startuml pr1_kulakov
+
+title Программное обеспечение банкомата
+
+skinparam MaxMessageSize 200
+skinparam sequenceMessageAlign center
+Actor "Пользователь" as actor order 10
+participant "Клиент" as client order 20
+participant "Банкомат" as ta order 30
+database "Сервер" as database order 40
+
+
+actor -> client: Авторизация по карте
+client -> client: Отобразить, что авторизация прошла успешно
+
+!$st = "Запрос"
+client -> ta: $st на снятие наличных
+client -> ta: $st на печать справки
+
+ta -> database: Обработать запрос\n на сервере
+database -> database: Получение данных
+database -> client: Вывод справки
+database -> client: Снятие наличных
+
+@enduml
+
